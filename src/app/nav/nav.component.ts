@@ -9,7 +9,7 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-  menuItems = ['dashboard', 'account', 'cash', 'investment', 'summary'];
+  menuItems = ['account','dashboard', 'invest'];
 
   showFiller = false;
 

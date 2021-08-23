@@ -17,12 +17,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CardComponent } from './card/card.component';
+import { InvestmentValueChartComponent } from './charts/investment-value-chart/investment-value-chart.component';
+import { CashValueChartComponent } from './charts/cash-value-chart/cash-value-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    CardComponent,
+    InvestmentValueChartComponent,
+    CashValueChartComponent
   ],
   imports: [
     BrowserModule,
