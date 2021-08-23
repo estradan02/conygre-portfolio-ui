@@ -1,0 +1,77 @@
+<!-- <mat-sidenav-container class="sidenav-container">
+  <mat-drawer #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <a mat-list-item >
+          <a *ngFor="let item of menuItems" mat-list-item [routerLink]="'/'+item"> {{item | titlecase}} </a>
+        </a>
+      </mat-list-item>      
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Portfolio Manager</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-sidenav-container> -->
+
+<!-- <mat-drawer-container class="example-container" autosize [hasBackdrop]="true">
+  <mat-drawer #drawer class="example-sidenav" mode="push">
+    <p>Menu</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>
+
+</mat-drawer-container> -->
+
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" #sidenav opened position="start" color="primary">
+    <mat-toolbar class="side-nav-toolbar" color='primary'>
+      <mat-icon>explore</mat-icon> Menu
+    </mat-toolbar>
+    <mat-nav-list class="nav-items">
+      <a *ngFor="let item of menuItems" mat-list-item [routerLink]="'/'+item"> {{item | titlecase}} </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      Portfolio Manager
+      <span class="toolbar-spacer"></span>
+      <!-- <mat-slide-toggle
+          class="example-margin"
+          [color]="color"
+          [checked]="checked"
+          [disabled]="disabled">
+        Slide me!
+      </mat-slide-toggle> -->
+      <mat-icon aria-hidden="false" aria-label="account user icon">account_circle</mat-icon> My Account
+    </mat-toolbar>
+    <div class="main-content">
+      <!-- <app-dashboard></app-dashboard> -->
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
