@@ -20,6 +20,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CardComponent } from './card/card.component';
 import { InvestmentValueChartComponent } from './charts/investment-value-chart/investment-value-chart.component';
 import { CashValueChartComponent } from './charts/cash-value-chart/cash-value-chart.component';
+import { InvestmentComponent } from './investment/investment.component';
+import { MiniCardComponent } from './mini-card/mini-card.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { CashValueChartComponent } from './charts/cash-value-chart/cash-value-ch
     DashboardComponent,
     CardComponent,
     InvestmentValueChartComponent,
-    CashValueChartComponent
+    CashValueChartComponent,
+    InvestmentComponent,
+    MiniCardComponent
   ],
   imports: [
     BrowserModule,

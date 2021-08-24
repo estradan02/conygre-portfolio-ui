@@ -1,0 +1,50 @@
+.dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.value-text {
+    margin: 0;
+}
+
+.title-text {
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+    color: grey;
+}
+
+.avatar-icon {
+    margin: 15px;
+    transform: scale(2);
+}
+
+.duration {
+    color: grey;
+}
+
+.difference-text {
+    text-align: center;
+    margin-top: 10px ;
+}
+
+.card-icon {
+    margin-right: 15px;
+}
+
+.card-header {
+    justify-content: center;
+}
+
+.green-text {
+    color: green;
+}
+
+.red-text {
+    color: red;
+}
