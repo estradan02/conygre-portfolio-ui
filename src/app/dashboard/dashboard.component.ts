@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { PortfolioService } from '../services/portfolio.service';
+import { Holding } from '../classes/holding';
+import { InvestmentComponent } from '../investment/investment.component';
 // import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -32,7 +35,7 @@ export class DashboardComponent {
   // );
 
   // miniCardData: userSummary[];
-
+  
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -53,7 +56,7 @@ export class DashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private allHoldings:InvestmentComponent) {}
 }
 
 // , private portfolioService:PortfolioService

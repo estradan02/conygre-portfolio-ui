@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
@@ -11,7 +11,8 @@ import { Holding } from '../classes/holding';
   styleUrls: ['./investment.component.css']
 })
 export class InvestmentComponent implements OnInit {
-
+  @Input() allHoldings:Holding[] = new Array()
+  
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -31,11 +32,12 @@ export class InvestmentComponent implements OnInit {
       };
     })
   );
+  
 
   date:Date=new Date();
 
   // allHoldings = {id: 1, accountId:1, type: '', name: '', symbol: '', buyPrice: 1, amount: 1, curPrice: 1, buyDate: '', percentChange: 1}
-  allHoldings:Holding[] = new Array()
+  //allHoldings:Holding[] = new Array()
   x = 1
 
   constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService) {}
