@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
@@ -12,6 +12,7 @@ import { InvestmentComponent } from '../investment/investment.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  @Input() investmentValue:number = 0
   allHoldings:Holding[] = new Array()
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -67,7 +68,9 @@ export class DashboardComponent {
   }
 
   totalInvestmentValue(){
-    
+    for(let stock of this.allHoldings){
+      this.investmentValue += stock.curPrice * stock.amount
+    }
   }
 }
 
