@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+
 // import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -54,6 +55,5 @@ export class DashboardComponent {
   );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
-}
 
-// , private portfolioService:PortfolioService
+}
