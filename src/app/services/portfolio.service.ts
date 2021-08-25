@@ -7,7 +7,6 @@ import { Injectable } from '@angular/core';
 import { Holding } from 'src/app/classes/holding';
 import { HttpClient } from '@angular/common/http';          // HttpClient Service
 import { Observable } from 'rxjs'                           // Observable returned from HttpClient methods
-
 @Injectable({
   providedIn: 'root'
 })

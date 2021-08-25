@@ -1,9 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+<<<<<<< HEAD
+
+=======
 import { PortfolioService } from '../services/portfolio.service';
 import { Holding } from '../classes/holding';
 import { InvestmentComponent } from '../investment/investment.component';
+>>>>>>> 3533d5ccd551813e0a554e79ebeef00ce0c3a6e5
 // import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -59,6 +63,9 @@ export class DashboardComponent {
     })
   );
 
+<<<<<<< HEAD
+  constructor(private breakpointObserver: BreakpointObserver) {}
+=======
   constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService) {}
 
   dashboardHoldings(){
@@ -73,5 +80,6 @@ export class DashboardComponent {
     }
   }
 }
+>>>>>>> 3533d5ccd551813e0a554e79ebeef00ce0c3a6e5
 
-// , private portfolioService:PortfolioService
+}
