@@ -22,6 +22,10 @@ import { InvestmentValueChartComponent } from './charts/investment-value-chart/i
 import { CashValueChartComponent } from './charts/cash-value-chart/cash-value-chart.component';
 import { InvestmentComponent } from './investment/investment.component';
 import { MiniCardComponent } from './mini-card/mini-card.component';
+import { HoldingsTableComponent } from './tables/holdings-table/holdings-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { MiniCardComponent } from './mini-card/mini-card.component';
     InvestmentValueChartComponent,
     CashValueChartComponent,
     InvestmentComponent,
-    MiniCardComponent
+    MiniCardComponent,
+    HoldingsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,10 @@ import { MiniCardComponent } from './mini-card/mini-card.component';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports: [
     BrowserModule,
