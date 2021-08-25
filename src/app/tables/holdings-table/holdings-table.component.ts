@@ -2,11 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { HoldingsTableDataSource, HoldingsTableItem } from './holdings-table-datasource';
+import { HoldingsTableDataSource } from './holdings-table-datasource';
 
-
-import { Holding } from '../classes/holding';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { Holding } from 'src/app/classes/holding';
 
 @Component({
   selector: 'app-holdings-table',
@@ -16,9 +15,10 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 export class HoldingsTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<HoldingsTableItem>;
-  dataLength: number;
-  dataSource: HoldingsTableDataSource;
+  @ViewChild(MatTable) table!: MatTable<Holding>;
+  dataLength!: number;
+  dataSource!: HoldingsTableDataSource;
+  errorMessage!: string;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -33,18 +33,22 @@ export class HoldingsTableComponent implements AfterViewInit, OnInit {
     'percentChange'
   ];
 
-  constructor(private portfolioService: PortfolioService) {
-    this.dataSource = new HoldingsTableDataSource();
-  }
-  
-  ngOnInit() {
+  constructor(private portfolioService: PortfolioService){
     this.dataSource = new HoldingsTableDataSource(this.portfolioService);
-    // this.portfolioService.getOrderCount().subscribe({
-    //   next: orderCount => {
-    // this.dataLength = orderCount;
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit() {
+    this.dataSource = new HoldingsTableDataSource(this.portfolioService);
+    this.portfolioService.getHoldingCount().subscribe({
+      next: holdingCount => {
+        this.dataLength = holdingCount;
+        console.log(this.dataLength);
+      },
+      error: err => this.errorMessage = err
+    });
+  }
+
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
