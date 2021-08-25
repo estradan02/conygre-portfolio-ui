@@ -6,6 +6,6 @@ export class Holding {
     buyPrice!: number;
     amount!: number;
     curPrice!: number;
-    buyDate!: Date;
+    buyDate!: string;
     percentChange!: number;
 }

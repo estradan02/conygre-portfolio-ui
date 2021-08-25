@@ -1,28 +1,47 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { HoldingsTableDataSource, HoldingsTableItem } from './holdings-table-datasource';
 
-// import { PortfolioService } from '../portfolio.service';
-// import { Holdings } from '../classes/holdings';
+
+import { Holding } from '../classes/holding';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 
 @Component({
   selector: 'app-holdings-table',
   templateUrl: './holdings-table.component.html',
   styleUrls: ['./holdings-table.component.css']
 })
-export class HoldingsTableComponent implements AfterViewInit {
+export class HoldingsTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<HoldingsTableItem>;
+  dataLength: number;
   dataSource: HoldingsTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = [
+    'id',
+    'accountId', 
+    'type', 
+    'symbol', 
+    'buyPrice', 
+    'amount', 
+    'curPrice', 
+    'buyDate', 
+    'percentChange'
+  ];
 
-  constructor() {
+  constructor(private portfolioService: PortfolioService) {
     this.dataSource = new HoldingsTableDataSource();
+  }
+  
+  ngOnInit() {
+    this.dataSource = new HoldingsTableDataSource(this.portfolioService);
+    // this.portfolioService.getOrderCount().subscribe({
+    //   next: orderCount => {
+    // this.dataLength = orderCount;
   }
 
   ngAfterViewInit(): void {
