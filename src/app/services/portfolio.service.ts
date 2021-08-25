@@ -13,12 +13,12 @@ import { Observable } from 'rxjs'                           // Observable return
 })
 
  export class PortfolioService {
-  private baseURL = "http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com"
+  private baseURL = "http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager"
 
   constructor(private httpClient: HttpClient) { }             // Inject HttpClient service!
 
   public getHoldings() : Observable<Holding[]> {             // getting holdings
-    return this.httpClient.get<Holding[]>(`${this.baseURL}/portfolio-manager/user/holdings`)
+    return this.httpClient.get<Holding[]>(`${this.baseURL}/user/holdings`)
   }
   
   // private salesUrl = 'api/sales/sales.json';
