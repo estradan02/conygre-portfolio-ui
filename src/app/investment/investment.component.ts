@@ -47,7 +47,7 @@ export class InvestmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  makeServiceCall(){
+  investmentsHoldings(){
     // we call the service method by subscribing to it
     // remember the api call will be async so subscribing responds when it returns
     this.portfolioService.getHoldings().subscribe((data:Holding[])=>{this.allHoldings = data})

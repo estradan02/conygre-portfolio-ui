@@ -12,6 +12,8 @@ import { InvestmentComponent } from '../investment/investment.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  allHoldings:Holding[] = new Array()
+
   /** Based on the screen size, switch from standard to one column per row */
 
   // cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -56,7 +58,17 @@ export class DashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private allHoldings:InvestmentComponent) {}
+  constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService) {}
+
+  dashboardHoldings(){
+    // we call the service method by subscribing to it
+    // remember the api call will be async so subscribing responds when it returns
+    this.portfolioService.getHoldings().subscribe( (data:Holding[])=>{this.allHoldings = data} )
+  }
+
+  totalInvestmentValue(){
+    
+  }
 }
 
 // , private portfolioService:PortfolioService
