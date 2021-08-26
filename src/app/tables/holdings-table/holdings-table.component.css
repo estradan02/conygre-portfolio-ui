@@ -5,3 +5,11 @@
 .small-table{
   overflow-x: scroll !important;
 }
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+}
+
+th.mat-header-cell {
+  text-align: center !important;
+}
