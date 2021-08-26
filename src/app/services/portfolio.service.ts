@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { MarketMover } from '../classes/marketmover';
 import { UserSummary } from '../classes/user-summary';
 import { Account } from '../classes/account';
+import { AccountHistory } from '../classes/account-history';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ import { Account } from '../classes/account';
 
   public getMarketMovers() : Observable<MarketMover[]> {
     return this.httpClient.get<MarketMover[]>(`${this.baseURL}/marketmovers`);
+  }
+
+  public getAccountInvestmentHistory() : Observable<AccountHistory[]> {
+    return this.httpClient.get<AccountHistory[]>(`${this.baseURL}/accounts/1/history`);
+  }
+
+  public getAccountCashHistory() : Observable<AccountHistory[]> {
+    return this.httpClient.get<AccountHistory[]>(`${this.baseURL}/accounts/2/history`);
   }
   
   public getHoldings(offset?: number, pageSize?: number, sortField?: string, sortDirection?: string) : Observable<Holding[]> {

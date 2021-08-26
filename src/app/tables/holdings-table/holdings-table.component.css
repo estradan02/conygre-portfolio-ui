@@ -6,10 +6,17 @@
   overflow-x: scroll !important;
 }
 
-mat-header-cell, mat-cell {
-  justify-content: center !important;
+.mat-header-cell {
+  text-align: center !important;
 }
 
-th.mat-header-cell {
+td, th {
   text-align: center !important;
+  vertical-align: middle !important;
+}
+
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
 }

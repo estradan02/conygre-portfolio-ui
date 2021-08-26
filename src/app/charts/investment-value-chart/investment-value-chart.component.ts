@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 
 @Component({
   selector: 'app-investment-value-chart',
@@ -10,9 +11,9 @@ import { Color, Label } from 'ng2-charts';
 export class InvestmentValueChartComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [], label: 'Total Investment' },
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Label[] = [];
   public lineChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false
@@ -20,16 +21,23 @@ export class InvestmentValueChartComponent implements OnInit {
   public lineChartColors: Color[] = [
     {
       borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
+      backgroundColor: '#caffbf',
     },
   ];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
-  constructor() { }
+  constructor(private portfolioService: PortfolioService) { }
 
   ngOnInit() {
+    this.portfolioService.getAccountInvestmentHistory().subscribe({
+      next: investItem => {
+        investItem.forEach(li => {
+          this.lineChartData[0].data?.push(li.netWorth);
+          this.lineChartLabels.push(li.closingDate);
+        });
+      }
+    });
+    }
   }
-
-}

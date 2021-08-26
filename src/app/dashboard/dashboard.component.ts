@@ -7,7 +7,6 @@ import { UserSummary } from '../classes/user-summary';
 import { InvestmentComponent } from '../investment/investment.component';
 import { MarketMover } from '../classes/marketmover';
 import { Account } from '../classes/account';
-// import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,26 +21,6 @@ export class DashboardComponent implements OnInit{
   userAccount:Account[] = new Array();
 
   /** Based on the screen size, switch from standard to one column per row */
-
-  // cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-  //   map(({ matches }) => {
-  //     if (matches) {
-  //       return [
-  //         { title: 'Valuation Summary', cols: 1, rows: 1 },
-  //         { title: 'Investment Value', cols: 1, rows: 1 },
-  //         { title: 'Current Holdings', cols: 1, rows: 1 },
-  //         { title: 'Cash Value', cols: 1, rows: 1 }
-  //       ];
-  //     }
-
-  //     return [
-  //       { title: 'Valuation Summary', cols: 2, rows: 1 },
-  //       { title: 'Investment Value', cols: 1, rows: 1 },
-  //       { title: 'Current Holdings', cols: 1, rows: 2 },
-  //       { title: 'Cash Value', cols: 1, rows: 1 }
-  //     ];
-  //   })
-  // );
   
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
