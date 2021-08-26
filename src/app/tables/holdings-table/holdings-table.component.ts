@@ -26,6 +26,7 @@ export class HoldingsTableComponent implements AfterViewInit, OnInit {
     // 'accountId', 
     'type', 
     'symbol', 
+    'name',
     'buyPrice', 
     'amount', 
     'curPrice', 

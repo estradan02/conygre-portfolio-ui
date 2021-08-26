@@ -7,7 +7,7 @@
 }
 
 mat-header-cell, mat-cell {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 th.mat-header-cell {

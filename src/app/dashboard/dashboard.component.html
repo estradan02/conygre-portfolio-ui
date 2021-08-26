@@ -93,10 +93,12 @@
       </app-card>
     </mat-grid-tile>
     <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols" [rowspan]="( cardLayout | async )?.table!.rows">
-      <app-card title="Net Worth"><div>Table Content Here</div></app-card>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols" [rowspan]="( cardLayout | async )?.chart!.rows">
+      <app-card title="Net Worth">
+        <app-net-worth-chart></app-net-worth-chart>
+      </app-card>
     </mat-grid-tile>
   </mat-grid-list>
  </div>
 
- <p>result</p>
+ <button (click)="userAccounts()">click for account data</button>

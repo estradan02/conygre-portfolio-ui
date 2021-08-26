@@ -28,6 +28,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import { MatChipsModule } from '@angular/material/chips';
+import { NetWorthChartComponent } from './charts/net-worth-chart/net-worth-chart.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatChipsModule } from '@angular/material/chips';
     CashValueChartComponent,
     InvestmentComponent,
     MiniCardComponent,
-    HoldingsTableComponent
+    HoldingsTableComponent,
+    NetWorthChartComponent
   ],
   imports: [
     BrowserModule,

@@ -3,5 +3,5 @@ export class Account {
     user_id!: number;
     type!: string;
     name!: string;
-    cashValue!: number;
+    cash_value!: number;
 }
