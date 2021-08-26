@@ -19,3 +19,11 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+.grid {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: larger;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr; /* Create 5 columns and auto-place rows */
+}

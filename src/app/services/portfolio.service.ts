@@ -22,7 +22,7 @@ import { MarketMover } from '../classes/marketmover';
   // }
 
   public getMarketMovers() : Observable<MarketMover[]> {
-    return this.httpClient.get<MarketMover[]>('${this.baseURL}/marketmovers')
+    return this.httpClient.get<MarketMover[]>(`${this.baseURL}/marketmovers`)
   }
   
   public getHoldings(offset?: number, pageSize?: number, sortField?: string, sortDirection?: string) : Observable<Holding[]> {
