@@ -1,27 +1,76 @@
 <!-- add "small-table" for responsiveness if needed -->
 <div class="mat-elevation-z8 small-table">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
-    </ng-container>
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+    <td mat-cell *matCellDef="let row">{{row.id}}</td>
+  </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.name}}</td>
-    </ng-container>
+  <!-- Account ID Column -->
+  <ng-container matColumnDef="accountId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Account ID</th>
+    <td mat-cell *matCellDef="let row">{{row.accountId}}</td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+    <td mat-cell *matCellDef="let row">
+      <mat-chip-list>
+        <mat-chip color="{{ row.type == 'investment' ? 'primary' : ( row.type == 'cash' ? 'accent' : 'warn' ) }}" selected>
+          {{row.status}}
+        </mat-chip>
+      </mat-chip-list>
+    </td>
+  </ng-container>
 
-  <mat-paginator #paginator
-      [length]="dataSource?.data?.length"
-      [pageIndex]="0"
-      [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 20]"
-      aria-label="Select page">
-  </mat-paginator>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let row">{{row.name}}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
+    <td mat-cell *matCellDef="let row">{{row.symbol}}</td>
+  </ng-container>
+
+  <!-- Buy Price Column -->
+  <ng-container matColumnDef="buyPrice">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Buy Price</th>
+    <td mat-cell *matCellDef="let row">{{row.buyPrice}}</td>
+  </ng-container>
+
+  <!-- Amount Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+    <td mat-cell *matCellDef="let row">{{row.amount}}</td>
+  </ng-container>
+
+  <!-- Current Price Column -->
+  <ng-container matColumnDef="curPrice">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Current Price</th>
+    <td mat-cell *matCellDef="let row">{{row.curPrice}}</td>
+  </ng-container>
+
+  <!-- Buy Date Column -->
+  <ng-container matColumnDef="buyDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Buy Date</th>
+    <td mat-cell *matCellDef="let row">{{row.buyDate}}</td>
+  </ng-container>
+
+  <!-- Percent Change Column -->
+  <ng-container matColumnDef="percentChange">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Percent Change</th>
+    <td mat-cell *matCellDef="let row">{{row.percentChange}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator #paginator [length]="dataLength" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]">
+</mat-paginator>
 </div>
