@@ -36,7 +36,8 @@
     <!--Mini Cards-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
-      <app-card title="Current Cash Value"><div>Mini Card !Content Here</div></app-card>
+      <app-card title="Current Cash Value"><div>${{currentCash}}</div></app-card>
+      <!-- <app-mini-card [value]="currentCash">{{currentCash}}</app-mini-card> -->
     </mat-grid-tile>
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
@@ -86,5 +87,3 @@
     </mat-grid-tile>
   </mat-grid-list>
  </div>
-
- <button (click)="userAccounts()">click for account data</button>

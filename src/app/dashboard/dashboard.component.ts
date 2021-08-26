@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
@@ -8,6 +8,7 @@ import { InvestmentComponent } from '../investment/investment.component';
 import { HttpClient } from '@angular/common/http';
 import { MarketMover } from '../classes/marketmover';
 import { Account } from '../classes/account';
+import { AccountHistory } from '../classes/account-history';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,12 +17,14 @@ import { Account } from '../classes/account';
 })
 export class DashboardComponent implements OnInit{
   @Input() investmentValue:number = 0;
+  @Input()
+  currentCash=this.userCurrentCash();
   allHoldings:Holding[] = new Array();
   allMarketMovers:MarketMover[] = new Array();
-  miniCardData:UserSummary[] = new Array();
+  cashCardData:AccountHistory[] = new Array();
   userAccount:Account[] = new Array();
-  public my_data:any=[]
-  public marketMovers:any=[]
+  public my_data:any=[];
+  public marketMovers:any=[];
 
   /** Based on the screen size, switch from standard to one column per row */
   
@@ -48,11 +51,8 @@ export class DashboardComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService, private http:HttpClient) {}
 
   ngOnInit(){
-    // this.portfolioService.getUserSummary().subscribe({
-    //   next: summaryData => {
-    //     this.miniCardData = summaryData;
-    //   }
-    // })
+
+    this.userCurrentCash();
     this.userAccounts();
     this.makeMarketMoversCall();
   }
@@ -60,6 +60,16 @@ export class DashboardComponent implements OnInit{
   userAccounts() {
     this.portfolioService.getAccountForUser().subscribe( (data:Account[])=>{this.userAccount = data})
     return console.log(this.userAccount)
+  }
+
+  userCurrentCash(): any {
+    this.portfolioService.getCurrentCash().subscribe( (data:AccountHistory[])=>{
+      let currentCash = data.pop()?.netWorth
+      // this.cashCardData = currentCash
+      console.log(currentCash);
+      return currentCash
+
+    })
   }
 
   dashboardHoldings(){

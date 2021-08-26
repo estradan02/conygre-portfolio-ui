@@ -43,6 +43,14 @@ import { AccountHistory } from '../classes/account-history';
   public getAccountCashHistory() : Observable<AccountHistory[]> {
     return this.httpClient.get<AccountHistory[]>(`${this.baseURL}/accounts/2/history`);
   }
+
+  public getAccountNetWorthHistory() : Observable<AccountHistory[]> {
+    return this.httpClient.get<AccountHistory[]>(`${this.baseURL}/accounts/3/history`);
+  }
+
+  public getCurrentCash() : Observable<AccountHistory[]> {
+    return this.httpClient.get<AccountHistory[]>(`${this.baseURL}/accounts/2/history`);
+  }
   
   public getHoldings(offset?: number, pageSize?: number, sortField?: string, sortDirection?: string) : Observable<Holding[]> {
     return this.httpClient.get<Holding[]>(`${this.baseURL}/accounts/1/holdings`).pipe(
