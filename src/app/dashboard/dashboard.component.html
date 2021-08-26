@@ -40,7 +40,7 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
-      <app-card title="Current Investment Value"><div>{{investmentValue}}</div></app-card>
+      <app-card title="Current Investment Value"><div>${{investmentValue}}</div></app-card>
     </mat-grid-tile>
 
 
