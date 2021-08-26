@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
 import { Holding } from '../classes/holding';
 import { InvestmentComponent } from '../investment/investment.component';
+import { HttpClient } from '@angular/common/http';
 // import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -14,31 +15,7 @@ import { InvestmentComponent } from '../investment/investment.component';
 export class DashboardComponent {
   @Input() investmentValue:number = 0
   allHoldings:Holding[] = new Array()
-
-  /** Based on the screen size, switch from standard to one column per row */
-
-  // cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-  //   map(({ matches }) => {
-  //     if (matches) {
-  //       return [
-  //         { title: 'Valuation Summary', cols: 1, rows: 1 },
-  //         { title: 'Investment Value', cols: 1, rows: 1 },
-  //         { title: 'Current Holdings', cols: 1, rows: 1 },
-  //         { title: 'Cash Value', cols: 1, rows: 1 }
-  //       ];
-  //     }
-
-  //     return [
-  //       { title: 'Valuation Summary', cols: 2, rows: 1 },
-  //       { title: 'Investment Value', cols: 1, rows: 1 },
-  //       { title: 'Current Holdings', cols: 1, rows: 2 },
-  //       { title: 'Cash Value', cols: 1, rows: 1 }
-  //     ];
-  //   })
-  // );
-
-  // miniCardData: userSummary[];
-  
+  public my_data:any=[]
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -59,7 +36,7 @@ export class DashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService, private http:HttpClient) {}
 
   dashboardHoldings(){
     // we call the service method by subscribing to it
@@ -71,5 +48,29 @@ export class DashboardComponent {
     for(let stock of this.allHoldings){
       this.investmentValue += stock.curPrice * stock.amount
     }
+  }
+
+  getTopandBottom(){
+    const holdings_url='https://jsonplaceholder.typicode.com/photos?albumId=1'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      for (let i = 0; i < temp.length-1; i++) {
+        for(let j=0; j<temp.length-i-1; j++){
+          if (temp[j].id<temp[j+1].id) {
+            let var2=temp[j]
+            temp[j]=temp[j+1]
+            temp[j+1]=var2
+          }
+        }
+
+      }
+      for(let k = 0; k < temp.length; k++){
+        this.my_data[k]=temp[k]
+        console.log(this.my_data[k].id)
+      }
+    })
+  
   }
 }
