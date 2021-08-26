@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit{
   miniCardData:UserSummary[] = new Array();
   userAccount:Account[] = new Array();
   public my_data:any=[]
+  public marketMovers:any=[]
 
   /** Based on the screen size, switch from standard to one column per row */
 
@@ -117,10 +118,34 @@ export class DashboardComponent implements OnInit{
     })
   
   }
+
   makeMarketMoversCall(){
+
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/marketmovers'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      for (let i = 0; i < temp.length-1; i++) {
+        for(let j=0; j<temp.length-i-1; j++){
+          if (temp[j].currentPrice<temp[j+1].currentPrice) {
+            let var2=temp[j]
+            temp[j]=temp[j+1]
+            temp[j+1]=var2
+          }
+        }
+
+      }
+      for(let k = 0; k < temp.length; k++){
+        this.marketMovers[k]=temp[k]
+        // console.log(this.marketMovers[k].id)
+      }
+    })
+
+
     // we call the service method by subscribing to it
     // remember the api call will be async so subscribing responds when it returns
-    this.portfolioService.getMarketMovers().subscribe((data:MarketMover[])=>{this.allMarketMovers = data})
+    //this.portfolioService.getMarketMovers().subscribe((data:MarketMover[])=>{this.allMarketMovers = data})
   }
 
 }
