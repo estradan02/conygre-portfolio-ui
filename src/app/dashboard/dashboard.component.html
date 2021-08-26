@@ -90,7 +90,7 @@
       </app-card>
     </mat-grid-tile>
     <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols" [rowspan]="( cardLayout | async )?.table!.rows">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols" [rowspan]="( cardLayout | async )?.chart!.rows">
       <app-card title="Net Worth">
         <app-net-worth-chart></app-net-worth-chart>
       </app-card>

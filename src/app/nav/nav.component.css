@@ -40,7 +40,7 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 mat-sidenav {
-    width: 280px;
+    width: 230px;
     padding:0px;
 }
 mat-icon {
@@ -73,4 +73,8 @@ a {
 .account-button {
   background-color: inherit;
   border: none;
+}
+.nav-toolbar {
+  position: fixed;
+  z-index: 1;
 }
