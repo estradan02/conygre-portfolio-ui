@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit{
     this.userCurrentCash();
     this.userAccounts();
     this.makeMarketMoversCall();
+    this.getInvestmentValue();
   }
 
   userAccounts() {
@@ -106,6 +107,32 @@ export class DashboardComponent implements OnInit{
       }
     })
   
+  }
+
+  getInvestmentValue(){
+
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/accounts/1/holdings'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      // for (let i = 0; i < temp.length-1; i++) {
+      //   for(let j=0; j<temp.length-i-1; j++){
+      //     if (temp[j].currentPrice<temp[j+1].currentPrice) {
+      //       let var2=temp[j]
+      //       temp[j]=temp[j+1]
+      //       temp[j+1]=var2
+      //     }
+      //   }
+
+      // }
+
+      for(let k = 0; k < temp.length; k++){
+        //this.marketMovers[k]=temp[k]
+        this.investmentValue = this.investmentValue + (temp[k].amount * temp[k].curPrice)
+        console.log(this.investmentValue)
+      }
+    })
   }
 
   makeMarketMoversCall(){
