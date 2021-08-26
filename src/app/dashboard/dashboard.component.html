@@ -49,7 +49,7 @@
         <br>
         <br>
         <div class='grid'>
-        <ng-container *ngFor="let item of allMarketMovers">
+        <ng-container *ngFor="let item of marketMovers">
           <label>
             {{item.symbol}}: {{item.percentChange}}
           </label>
@@ -81,7 +81,6 @@
         </div>
         <div>
         <button (click)="getTopandBottom()">Fetchhh</button>
-        
         <div *ngFor="let holding of my_data" style="text-align:center">
           <div >{{holding.id}}</div>
       </div>
