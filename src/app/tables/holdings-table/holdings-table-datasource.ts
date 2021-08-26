@@ -1,45 +1,10 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { Observable, merge, of } from 'rxjs';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Holding } from 'src/app/classes/holding';
-
-// TODO: Replace this with your own data model type
-// export interface HoldingsTableItem {
-//   id: number;
-//   accountId: number;
-//   type: string;
-//   symbol: string;
-//   buyPrice: number;
-//   amount: number;
-//   curPrice: number;
-//   buyDate: string;
-//   percentChange: number;
-// }
-
-// TODO: replace this with real data from your application
-// const EXAMPLE_DATA: HoldingsTableItem[] = [
-//   {id: 1,  accountId:3, type: "Invest", symbol: 'Hydrogen' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 2,  accountId:3, type: "Invest", symbol: 'Helium' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 3,  accountId:3, type: "Invest", symbol: 'Lithium' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 4,  accountId:3, type: "Invest", symbol: 'Beryllium' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 5,  accountId:3, type: "Invest", symbol: 'Boron' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 6,  accountId:3, type: "Invest", symbol: 'Carbon' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 7,  accountId:3, type: "Invest", symbol: 'Nitrogen' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 8,  accountId:3, type: "Invest", symbol: 'Oxygen' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5},
-//   {id: 9,  accountId:3, type: "Invest", symbol: 'Fluorine' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 10, accountId:3, type: "Invest", symbol: 'Neon' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 11, accountId:3, type: "Invest", symbol: 'Sodium' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5},
-//   {id: 12, accountId:3, type: "Invest", symbol: 'Magnesium' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 13, accountId:3, type: "Invest", symbol: 'Aluminum' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 14, accountId:3, type: "Invest", symbol: 'Silicon' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5},
-//   {id: 15, accountId:3, type: "Invest", symbol: 'Phosphorus' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5 },
-//   {id: 16, accountId:3, type: "Invest", symbol: 'Sulfur' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5},
-//   {id: 17, accountId:3, type: "Invest", symbol: 'Chlorine' ,buyPrice: 34, amount: 5, curPrice: 40, buyDate: "1/1/2021", percentChange: 5}
-
-// ];
 
 /**
  * Data source for the HoldingsTable view. This class should
@@ -60,8 +25,6 @@ export class HoldingsTableDataSource extends DataSource<Holding> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-
-  
   connect(): Observable<Holding[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update

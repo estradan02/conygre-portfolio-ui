@@ -27,11 +27,45 @@
 
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
+
+<!-- 
+  <div>
+    <h2 style="text-decoration: underline;">Market Movers</h2>
+    <div class='grid'>
+      <ng-container *ngFor="let item of exampleMarketMovers">
+        <label>
+          {{item.symbol}}: {{item.percentChange}}
+        </label>
+      </ng-container>
+    </div>
+  </div>  -->
+
   <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+
+    <!-- Market Movers -->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols"
+      [rowspan]="( cardLayout | async )?.miniCard!.rows">
+      <app-card title="Market Movers">
+        <br>
+        <br>
+        <div class='grid'>
+        <ng-container *ngFor="let item of allMarketMovers">
+          <label>
+            {{item.symbol}}: {{item.percentChange}}
+          </label>
+        </ng-container>
+      </div>
+      <div>
+        <br>
+        <button (click)='makeMarketMoversCall()'>Refresh!</button>
+      </div>
+    </app-card>
+    </mat-grid-tile>
+
     <!--Mini Cards-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
-      <app-card title="Current Cash Value"><div>Mini Card Content Here</div></app-card>
+      <app-card title="Current Cash Value"><div>Mini Card !Content Here</div></app-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
@@ -75,10 +109,12 @@
       </app-card>
     </mat-grid-tile>
     <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols" [rowspan]="( cardLayout | async )?.table!.rows">
-      <app-card title="Net Worth"><div>Table Content Here</div></app-card>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols" [rowspan]="( cardLayout | async )?.chart!.rows">
+      <app-card title="Net Worth">
+        <app-net-worth-chart></app-net-worth-chart>
+      </app-card>
     </mat-grid-tile>
   </mat-grid-list>
  </div>
 
- <p>result</p>
+ <button (click)="userAccounts()">click for account data</button>

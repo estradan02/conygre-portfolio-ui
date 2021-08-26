@@ -4,6 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';   // HttpC
 import { Observable, throwError } from 'rxjs'                           // Observable returned from HttpClient methods
 import { catchError, map } from 'rxjs/operators';
 import { MarketMover } from '../classes/marketmover';
+import { UserSummary } from '../classes/user-summary';
+import { Account } from '../classes/account';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +23,16 @@ import { MarketMover } from '../classes/marketmover';
   //   return this.httpClient.get<Holding[]>(`${this.baseURL}/user/holdings`)
   // }
 
+  public getAccountForUser() : Observable<Account[]> {
+    return this.httpClient.get<Account[]>(`${this.baseURL}/5/accounts`);
+  }
+
+  public getAccountForUserByType() : Observable<Account[]> {
+    return this.httpClient.get<Account[]>(`${this.baseURL}/5/accounts/type=Cash`);
+  }
+
   public getMarketMovers() : Observable<MarketMover[]> {
-    return this.httpClient.get<MarketMover[]>('${this.baseURL}/marketmovers')
+    return this.httpClient.get<MarketMover[]>(`${this.baseURL}/marketmovers`);
   }
   
   public getHoldings(offset?: number, pageSize?: number, sortField?: string, sortDirection?: string) : Observable<Holding[]> {
@@ -45,14 +55,6 @@ import { MarketMover } from '../classes/marketmover';
         return response.length;
       }));
   }
-  
-  // private salesUrl = 'api/sales/sales.json';
-
-//   constructor(private http: HttpClient) { }
-
-//   getUser(): Observable<MonthlySales[]>{
-//     return this.http.get<MonthlySales[]>(this.salesUrl).pipe(catchError(this.handleError));
-//   }
 
   private handleError(err: HttpErrorResponse){
     let errorMessage = '';
@@ -69,27 +71,27 @@ private getSortedData(data: Holding[], active: string, direction: string) {
   }
 
 
-return data.sort((a, b) => {
-  const isAsc = direction === 'asc';
-  switch (active) {
-    case "id": return compare(+a.id, +b.id, isAsc);
-    case "accountId": return compare(+a.accountId, +b.accountId, isAsc);
-    case "type": return compare(+a.type, +b.type, isAsc);
-    case "name": return compare(+a.name, +b.name, isAsc);
-    case "symbol": return compare(+a.symbol, +b.symbol, isAsc);
-    case "buyPrice": return compare(+a.buyPrice, +b.buyPrice, isAsc);
-    case "amount": return compare(+a.amount, +b.amount, isAsc);
-    case "curPrice": return compare(+a.curPrice, +b.curPrice, isAsc);
-    case "buyDate": return compare(+a.buyDate, +b.buyDate, isAsc);
-    case "percentChange": return compare(+a.percentChange, +b.percentChange, isAsc);
-    default: return 0;
+  return data.sort((a, b) => {
+    const isAsc = direction === 'asc';
+    switch (active) {
+      case "id": return compare(+a.id, +b.id, isAsc);
+      case "accountId": return compare(+a.accountId, +b.accountId, isAsc);
+      case "type": return compare(+a.type, +b.type, isAsc);
+      case "name": return compare(+a.name, +b.name, isAsc);
+      case "symbol": return compare(+a.symbol, +b.symbol, isAsc);
+      case "buyPrice": return compare(+a.buyPrice, +b.buyPrice, isAsc);
+      case "amount": return compare(+a.amount, +b.amount, isAsc);
+      case "curPrice": return compare(+a.curPrice, +b.curPrice, isAsc);
+      case "buyDate": return compare(+a.buyDate, +b.buyDate, isAsc);
+      case "percentChange": return compare(+a.percentChange, +b.percentChange, isAsc);
+      default: return 0;
+    }
   }
-}
-);
+  );
 
-function compare(a: string | number, b: string | number, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
+  function compare(a: string | number, b: string | number, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    }
   
 }
 

@@ -22,10 +22,11 @@ export class HoldingsTableComponent implements AfterViewInit, OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
-    'id',
-    'accountId', 
+    // 'id',
+    // 'accountId', 
     'type', 
     'symbol', 
+    'name',
     'buyPrice', 
     'amount', 
     'curPrice', 

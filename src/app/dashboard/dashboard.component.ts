@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
 import { Holding } from '../classes/holding';
+import { UserSummary } from '../classes/user-summary';
 import { InvestmentComponent } from '../investment/investment.component';
 import { HttpClient } from '@angular/common/http';
 import { MarketMover } from '../classes/marketmover';
+import { Account } from '../classes/account';
 // import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -13,11 +15,13 @@ import { MarketMover } from '../classes/marketmover';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
-  @Input() investmentValue:number = 0
-  allHoldings:Holding[] = new Array()
+export class DashboardComponent implements OnInit{
+  @Input() investmentValue:number = 0;
+  allHoldings:Holding[] = new Array();
+  allMarketMovers:MarketMover[] = new Array();
+  miniCardData:UserSummary[] = new Array();
+  userAccount:Account[] = new Array();
   public my_data:any=[]
-  allMarketMovers:MarketMover[] = new Array()
 
   /** Based on the screen size, switch from standard to one column per row */
 
@@ -40,8 +44,6 @@ export class DashboardComponent {
   //     ];
   //   })
   // );
-
-  // miniCardData: userSummary[];
   
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -64,6 +66,21 @@ export class DashboardComponent {
   );
 
   constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService, private http:HttpClient) {}
+
+  ngOnInit(){
+    // this.portfolioService.getUserSummary().subscribe({
+    //   next: summaryData => {
+    //     this.miniCardData = summaryData;
+    //   }
+    // })
+    this.userAccounts();
+    this.makeMarketMoversCall();
+  }
+
+  userAccounts() {
+    this.portfolioService.getAccountForUser().subscribe( (data:Account[])=>{this.userAccount = data})
+    return console.log(this.userAccount)
+  }
 
   dashboardHoldings(){
     // we call the service method by subscribing to it

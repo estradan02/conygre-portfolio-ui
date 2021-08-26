@@ -3,11 +3,11 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 @Component({
-  selector: 'app-investment-value-chart',
-  templateUrl: './investment-value-chart.component.html',
-  styleUrls: ['./investment-value-chart.component.css']
+  selector: 'app-net-worth-chart',
+  templateUrl: './net-worth-chart.component.html',
+  styleUrls: ['./net-worth-chart.component.css']
 })
-export class InvestmentValueChartComponent implements OnInit {
+export class NetWorthChartComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
