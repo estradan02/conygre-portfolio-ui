@@ -5,6 +5,7 @@ import { PortfolioService } from '../services/portfolio.service';
 import { Holding } from '../classes/holding';
 import { UserSummary } from '../classes/user-summary';
 import { InvestmentComponent } from '../investment/investment.component';
+import { HttpClient } from '@angular/common/http';
 import { MarketMover } from '../classes/marketmover';
 import { Account } from '../classes/account';
 
@@ -19,6 +20,8 @@ export class DashboardComponent implements OnInit{
   allMarketMovers:MarketMover[] = new Array();
   miniCardData:UserSummary[] = new Array();
   userAccount:Account[] = new Array();
+  public my_data:any=[]
+  public marketMovers:any=[]
 
   /** Based on the screen size, switch from standard to one column per row */
   
@@ -42,7 +45,7 @@ export class DashboardComponent implements OnInit{
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService, private http:HttpClient) {}
 
   ngOnInit(){
     // this.portfolioService.getUserSummary().subscribe({
@@ -71,10 +74,57 @@ export class DashboardComponent implements OnInit{
     }
   }
 
+  getTopandBottom(){
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/accounts/1/holdings'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      for (let i = 0; i < temp.length-1; i++) {
+        for(let j=0; j<temp.length-i-1; j++){
+          if (temp[j].curPrice<temp[j+1].curPrice) {
+            let var2=temp[j]
+            temp[j]=temp[j+1]
+            temp[j+1]=var2
+          }
+        }
+
+      }
+      for(let k = 0; k < temp.length; k++){
+        this.my_data[k]=temp[k]
+        console.log(this.my_data[k].id)
+      }
+    })
+  
+  }
+
   makeMarketMoversCall(){
+
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/marketmovers'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      for (let i = 0; i < temp.length-1; i++) {
+        for(let j=0; j<temp.length-i-1; j++){
+          if (temp[j].currentPrice<temp[j+1].currentPrice) {
+            let var2=temp[j]
+            temp[j]=temp[j+1]
+            temp[j+1]=var2
+          }
+        }
+
+      }
+      for(let k = 0; k < temp.length; k++){
+        this.marketMovers[k]=temp[k]
+        // console.log(this.marketMovers[k].id)
+      }
+    })
+
+
     // we call the service method by subscribing to it
     // remember the api call will be async so subscribing responds when it returns
-    this.portfolioService.getMarketMovers().subscribe((data:MarketMover[])=>{this.allMarketMovers = data})
+    //this.portfolioService.getMarketMovers().subscribe((data:MarketMover[])=>{this.allMarketMovers = data})
   }
 
 }
