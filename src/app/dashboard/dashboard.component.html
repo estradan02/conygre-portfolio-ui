@@ -46,6 +46,8 @@
     <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
       <app-card title="Market Movers">
+        <br>
+        <br>
         <div class='grid'>
         <ng-container *ngFor="let item of allMarketMovers">
           <label>
@@ -54,6 +56,7 @@
         </ng-container>
       </div>
       <div>
+        <br>
         <button (click)='makeMarketMoversCall()'>Refresh!</button>
       </div>
     </app-card>
