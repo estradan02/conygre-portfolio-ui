@@ -16,9 +16,10 @@ import { AccountHistory } from '../classes/account-history';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
-  @Input() investmentValue:number = 0;
+  @Input() 
+  investmentValue:number = 0;
   @Input()
-  currentCash=this.userCurrentCash();
+  currentCash:number = 0;
   allHoldings:Holding[] = new Array();
   allMarketMovers:MarketMover[] = new Array();
   cashCardData:AccountHistory[] = new Array();
@@ -51,26 +52,15 @@ export class DashboardComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService, private http:HttpClient) {}
 
   ngOnInit(){
-
-    this.userCurrentCash();
     this.userAccounts();
     this.makeMarketMoversCall();
+    this.getCashValue();
     this.getInvestmentValue();
   }
 
   userAccounts() {
     this.portfolioService.getAccountForUser().subscribe( (data:Account[])=>{this.userAccount = data})
     return console.log(this.userAccount)
-  }
-
-  userCurrentCash(): any {
-    this.portfolioService.getCurrentCash().subscribe( (data:AccountHistory[])=>{
-      let currentCash = data.pop()?.netWorth
-      // this.cashCardData = currentCash
-      console.log(currentCash);
-      return currentCash
-
-    })
   }
 
   dashboardHoldings(){
@@ -107,6 +97,16 @@ export class DashboardComponent implements OnInit{
       }
     })
   
+  }
+  
+  getCashValue(): any {
+    this.portfolioService.getCurrentCash().subscribe( (data:AccountHistory[])=>{
+      let temp:any = data.pop()?.netWorth
+      // this.cashCardData = currentCash
+      console.log(temp);
+      this.currentCash = temp;
+
+    })
   }
 
   getInvestmentValue(){
