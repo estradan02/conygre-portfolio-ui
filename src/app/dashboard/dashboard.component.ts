@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
 import { Holding } from '../classes/holding';
 import { InvestmentComponent } from '../investment/investment.component';
+import { MarketMover } from '../classes/marketmover';
 // import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { InvestmentComponent } from '../investment/investment.component';
 export class DashboardComponent {
   @Input() investmentValue:number = 0
   allHoldings:Holding[] = new Array()
+  allMarketMovers:MarketMover[] = new Array()
 
   /** Based on the screen size, switch from standard to one column per row */
 
@@ -72,4 +74,11 @@ export class DashboardComponent {
       this.investmentValue += stock.curPrice * stock.amount
     }
   }
+
+  makeMarketMoversCall(){
+    // we call the service method by subscribing to it
+    // remember the api call will be async so subscribing responds when it returns
+    this.portfolioService.getMarketMovers().subscribe((data:MarketMover[])=>{this.allMarketMovers = data})
+  }
+
 }

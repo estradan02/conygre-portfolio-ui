@@ -3,6 +3,7 @@ import { Holding } from 'src/app/classes/holding';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';   // HttpClient Service
 import { Observable, throwError } from 'rxjs'                           // Observable returned from HttpClient methods
 import { catchError, map } from 'rxjs/operators';
+import { MarketMover } from '../classes/marketmover';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ import { catchError, map } from 'rxjs/operators';
   // public getHoldings() : Observable<Holding[]> {             // getting holdings
   //   return this.httpClient.get<Holding[]>(`${this.baseURL}/user/holdings`)
   // }
+
+  public getMarketMovers() : Observable<MarketMover[]> {
+    return this.httpClient.get<MarketMover[]>('${this.baseURL}/marketmovers')
+  }
   
   public getHoldings(offset?: number, pageSize?: number, sortField?: string, sortDirection?: string) : Observable<Holding[]> {
     return this.httpClient.get<Holding[]>(`${this.baseURL}/accounts/1/holdings`).pipe(
