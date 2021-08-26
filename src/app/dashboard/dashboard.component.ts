@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit{
   }
 
   getTopandBottom(){
-    const holdings_url='http://localhost:8080/portfolio-manager/accounts/1/holdings'
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/accounts/1/holdings'
     this.http.get(holdings_url).subscribe((json_result)=>{
       let temp:any=[]
       
