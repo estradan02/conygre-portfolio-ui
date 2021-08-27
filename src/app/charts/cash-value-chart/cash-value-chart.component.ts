@@ -21,7 +21,7 @@ export class CashValueChartComponent implements OnInit {
   public lineChartColors: Color[] = [
     {
       borderColor: 'black',
-      backgroundColor: '#ffadad',
+      backgroundColor: '#a0c4ff',
     },
   ];
   public lineChartLegend = true;
