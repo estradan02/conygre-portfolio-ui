@@ -7,7 +7,7 @@ import { InvestmentComponent } from './investment/investment.component';
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'invest', component: InvestmentComponent}
+  { path: 'investments', component: InvestmentComponent}
 ];
 
 @NgModule({

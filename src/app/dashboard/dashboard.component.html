@@ -17,12 +17,12 @@
     <!-- Market Movers -->
     <mat-grid-tile [colspan]="( cardLayout | async )?.table!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
-      <app-card title="Market Movers">
+      <app-card title="Market Movers">        
         <br>
         <br>
         <div class='grid'>
         <ng-container *ngFor="let item of marketMovers">
-          <label>
+          <label class="market-mover-label">
             {{item.symbol}}: {{item.percentChange}}
           </label>
         </ng-container>
@@ -36,11 +36,23 @@
     <!--Mini Cards-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
-      <app-card title="Current Cash Value"><div>Mini Card !Content Here</div></app-card>
+      <app-card title="Current Cash Value"><div class="value-container">
+        <!-- <div class="icon-container">
+          <mat-icon class="minicard-icons" color='primary'>payment</mat-icon>
+        </div>
+        <div class="amount-container">
+          {{currentCash | currency}}
+        </div> -->
+        {{currentCash | currency}}
+      </div>
+    </app-card>
+      <!-- <app-mini-card [value]="currentCash">{{currentCash}}</app-mini-card> -->
     </mat-grid-tile>
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard!.cols"
       [rowspan]="( cardLayout | async )?.miniCard!.rows">
-      <app-card title="Current Investment Value"><div>{{investmentValue}}</div></app-card>
+      <app-card title="Current Investment Value"><div class="value-container">
+        {{investmentValue | currency}}
+      </div></app-card>
     </mat-grid-tile>
 
 
@@ -83,5 +95,3 @@
     </mat-grid-tile>
   </mat-grid-list>
  </div>
-
- <button (click)="userAccounts()">click for account data</button>

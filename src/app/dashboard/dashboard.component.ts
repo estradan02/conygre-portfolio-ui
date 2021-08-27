@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { PortfolioService } from '../services/portfolio.service';
@@ -8,6 +8,7 @@ import { InvestmentComponent } from '../investment/investment.component';
 import { HttpClient } from '@angular/common/http';
 import { MarketMover } from '../classes/marketmover';
 import { Account } from '../classes/account';
+import { AccountHistory } from '../classes/account-history';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,13 +16,16 @@ import { Account } from '../classes/account';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
-  @Input() investmentValue:number = 0;
+  @Input() 
+  investmentValue:number = 0;
+  @Input()
+  currentCash:number = 0;
   allHoldings:Holding[] = new Array();
   allMarketMovers:MarketMover[] = new Array();
-  miniCardData:UserSummary[] = new Array();
+  cashCardData:AccountHistory[] = new Array();
   userAccount:Account[] = new Array();
-  public my_data:any=[]
-  public marketMovers:any=[]
+  public my_data:any=[];
+  public marketMovers:any=[];
 
   /** Based on the screen size, switch from standard to one column per row */
   
@@ -48,13 +52,10 @@ export class DashboardComponent implements OnInit{
   constructor(private breakpointObserver: BreakpointObserver, private portfolioService:PortfolioService, private http:HttpClient) {}
 
   ngOnInit(){
-    // this.portfolioService.getUserSummary().subscribe({
-    //   next: summaryData => {
-    //     this.miniCardData = summaryData;
-    //   }
-    // })
     this.userAccounts();
     this.makeMarketMoversCall();
+    this.getCashValue();
+    this.getInvestmentValue();
   }
 
   userAccounts() {
@@ -96,6 +97,42 @@ export class DashboardComponent implements OnInit{
       }
     })
   
+  }
+  
+  getCashValue(): any {
+    this.portfolioService.getCurrentCash().subscribe( (data:AccountHistory[])=>{
+      let temp:any = data.pop()?.netWorth
+      // this.cashCardData = currentCash
+      console.log(temp);
+      this.currentCash = temp;
+
+    })
+  }
+
+  getInvestmentValue(){
+
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/accounts/1/holdings'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      // for (let i = 0; i < temp.length-1; i++) {
+      //   for(let j=0; j<temp.length-i-1; j++){
+      //     if (temp[j].currentPrice<temp[j+1].currentPrice) {
+      //       let var2=temp[j]
+      //       temp[j]=temp[j+1]
+      //       temp[j+1]=var2
+      //     }
+      //   }
+
+      // }
+
+      for(let k = 0; k < temp.length; k++){
+        //this.marketMovers[k]=temp[k]
+        this.investmentValue = this.investmentValue + (temp[k].amount * temp[k].curPrice)
+        console.log(this.investmentValue)
+      }
+    })
   }
 
   makeMarketMoversCall(){

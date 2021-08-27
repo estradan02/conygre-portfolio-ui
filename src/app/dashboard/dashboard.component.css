@@ -22,8 +22,33 @@
 
 .grid {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: larger;
+  font-size: 1vw;
   display: grid;
   text-align: center;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Create 5 columns and auto-place rows */
 }
+
+.value-container {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2vw;
+  display: grid;
+  text-align: center;
+}
+
+/* 
+.icon-container {
+  width: 25%;
+  float: left;
+} */
+
+/* .amount-container {
+  width: 75%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: larger;
+  display: grid;
+  text-align: center;
+} */
+/* 
+.minicard-icons {
+  
+} */
