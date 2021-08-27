@@ -48,13 +48,10 @@
 
       <app-card title="Top 5 Gainers">
         <div>
-          hELLO Worlllllllld
-        </div>
-        <div>
-        <button (click)="getTopandBottom()">Fetchhh</button>
-        <div *ngFor="let holding of my_data" style="text-align:center">
-          <div >{{holding.curPrice}}</div>
+        <div *ngFor="let holding of my_data" style="text-align:left; font-size:10px">
+          <div >{{holding.name}} ({{holding.symbol}}):   {{holding.curPrice}}</div>
       </div>
+      <button (click)="getTopandBottom()">Fetchhh</button>
       </div>
       </app-card>
 

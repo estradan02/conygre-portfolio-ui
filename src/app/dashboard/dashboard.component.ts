@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit{
         }
 
       }
-      for(let k = 0; k < temp.length; k++){
+      for(let k = 0; k < 5; k++){
         this.my_data[k]=temp[k]
         console.log(this.my_data[k].id)
       }
