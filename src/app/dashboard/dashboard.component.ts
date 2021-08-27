@@ -57,6 +57,8 @@ export class DashboardComponent implements OnInit{
     this.makeMarketMoversCall();
     this.getCashValue();
     this.getInvestmentValue();
+    this.getTopandBottom();
+    this.getTopandBottom2();
   }
 
   userAccounts() {
