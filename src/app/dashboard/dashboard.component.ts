@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit{
   cashCardData:AccountHistory[] = new Array();
   userAccount:Account[] = new Array();
   public my_data:any=[];
+  public my_data2:any=[];
   public marketMovers:any=[];
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnInit{
       if (matches) {
         return {
           columns: 1,
-          miniCard: { cols: 1, rows: 1 },
+          miniCard: { cols: 1, rows: 2 }, //maybe change cols to 2????
           chart: { cols: 1, rows: 2 },
           table: { cols: 1, rows: 4 },
         };
@@ -42,7 +43,7 @@ export class DashboardComponent implements OnInit{
  
      return {
         columns: 4,
-        miniCard: { cols: 1, rows: 1 },
+        miniCard: { cols: 1, rows: 2 }, //maybe change cols to 2????
         chart: { cols: 2, rows: 2 },
         table: { cols: 4, rows: 4 },
       };
@@ -83,7 +84,7 @@ export class DashboardComponent implements OnInit{
       temp=json_result
       for (let i = 0; i < temp.length-1; i++) {
         for(let j=0; j<temp.length-i-1; j++){
-          if (temp[j].curPrice<temp[j+1].curPrice) {
+          if (temp[j].percentChange<temp[j+1].percentChange) {
             let var2=temp[j]
             temp[j]=temp[j+1]
             temp[j+1]=var2
@@ -94,6 +95,30 @@ export class DashboardComponent implements OnInit{
       for(let k = 0; k < 5; k++){
         this.my_data[k]=temp[k]
         console.log(this.my_data[k].id)
+      }
+    })
+  
+  }
+
+  getTopandBottom2(){
+    const holdings_url='http://springbootportfolioproject-springbootportfolioproject.namdevops3.conygre.com/portfolio-manager/accounts/1/holdings'
+    this.http.get(holdings_url).subscribe((json_result)=>{
+      let temp:any=[]
+      
+      temp=json_result
+      for (let i = 0; i < temp.length-1; i++) {
+        for(let j=0; j<temp.length-i-1; j++){
+          if (temp[j].percentChange>temp[j+1].percentChange) {
+            let var2=temp[j]
+            temp[j]=temp[j+1]
+            temp[j+1]=var2
+          }
+        }
+
+      }
+      for(let k = 0; k < 5; k++){
+        this.my_data2[k]=temp[k]
+        console.log(this.my_data2[k].id)
       }
     })
   
